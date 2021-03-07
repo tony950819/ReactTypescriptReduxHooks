@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.3.4",
+    "@types/react-router-dom": "^5.1.7",
     "babel-eslint": "10.0.1",
     "babel-loader": "8.0.5",
     "babel-preset-react-app": "7.0.2",
@@ -75,7 +76,7 @@
       "ecmaVersion": 2018,
       "sourceType": "module",
       "ecmaFeatures": {
-        "jsx": true
+        "tsx": true
       }
     },
     "env": {
@@ -91,6 +92,11 @@
       "react/prop-types": "warn"
     },
     "settings": {
+      "import/resolver": {
+        "node": {
+          "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        }
+      },
       "react": {
         "version": "detect"
       }
