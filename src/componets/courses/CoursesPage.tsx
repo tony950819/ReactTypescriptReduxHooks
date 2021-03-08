@@ -1,18 +1,27 @@
-import React,{useState} from 'react';
+import React,{Dispatch, useState} from 'react';
 import {Course} from '../../Models/Models'
 import {connect,useSelector,/*useDispatch*/} from "react-redux"
 import {CreateCourse} from '../../redux/actions/courseActions';
-import { bindActionCreators } from 'redux';
+//import { bindActionCreators } from 'redux';
 //import { store } from '../../redux/configureStore';
 
 //import {CourseReducerModel} from '../../redux/reducers/courseReducer'
 //import {store} from '../../redux/configureStore'
 
+
+interface props extends StateCoursesPage,DispatchProps {}
+
 interface StateCoursesPage {
-    courses:Array<Course>
+    courses:Array<Course>,
+    
+
+}
+interface DispatchProps {
+    CreateCourse:typeof CreateCourse
 }
 
-function CoursePage (courses:StateCoursesPage) {
+
+function CoursePage (courses:props) {
 
     //const dispatch=useDispatch();
     const test= useSelector <Array<Course>>((state)=>state);
@@ -27,8 +36,9 @@ function CoursePage (courses:StateCoursesPage) {
 
         //dispatch({type:"CREATE_COURSE",payload:course});
 
+        //CreateCourse(course);
         //store.dispatch(CreateCourse(course));
-        //courses.actions.CreateCourse(course);
+        courses.CreateCourse(course);
         
     }
     const ShowCourses = () => {
@@ -58,15 +68,13 @@ function CoursePage (courses:StateCoursesPage) {
 }
 
 
-function mapStateToProps (state:StateCoursesPage){
+function mapStateToProps (state:any){
     return {
         courses:state.courses
     }
 }
 
-function  mapDispatchToprops (dispatch:any){
-    return {
-        actions:bindActionCreators(CreateCourse,dispatch)
-    }
-}
+const mapDispatchToprops =(dispatch:Dispatch<any>) => ({
+    CreateCourse: (course:Course) => dispatch(CreateCourse(course)),
+})
 export default connect(mapStateToProps ,mapDispatchToprops) (CoursePage);
