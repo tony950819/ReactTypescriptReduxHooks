@@ -33,11 +33,6 @@ function CoursePage (courses:props) {
     }
     const handleSubmit   =(event:any) => {
         event.preventDefault();
-
-        //dispatch({type:"CREATE_COURSE",payload:course});
-
-        //CreateCourse(course);
-        //store.dispatch(CreateCourse(course));
         courses.CreateCourse(course);
         
     }
@@ -68,11 +63,9 @@ function CoursePage (courses:props) {
 }
 
 
-function mapStateToProps (state:any){
-    return {
-        courses:state.courses
-    }
-}
+const  mapStateToProps  = (state:any)=>({
+    courses:state.courses
+})
 
 const mapDispatchToprops =(dispatch:Dispatch<any>) => ({
     CreateCourse: (course:Course) => dispatch(CreateCourse(course)),
