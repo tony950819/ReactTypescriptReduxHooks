@@ -4,11 +4,11 @@ import {BrowserRouter as Router} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import App from './componets/App';
-import configureStore from './redux/configureStore'
+import {store} from './redux/configureStore'
 import {Provider as ReduxProvider} from 'react-redux'
 
 ReactDOM.render(<>
-                <ReduxProvider store={configureStore()}>
+                <ReduxProvider store={store}>
                 <Router>
                     <App />
                 </Router>
