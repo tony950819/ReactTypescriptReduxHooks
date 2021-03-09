@@ -4,7 +4,6 @@ import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import {composeWithDevTools} from 'redux-devtools-extension'
 import { Course } from '../Models/Models';
 import thunk from 'redux-thunk';
-//import { CourseReducerModel } from './reducers/courseReducer';
 
 
 const InitialState ={ 
@@ -15,7 +14,7 @@ function configureStore (){
    //we'll be able to interact with our Redux store using Redux dev tools in the browser.
     return  createStore(
             rootReducer,
-            InitialState,
+            InitialState as any,
             composeWithDevTools(applyMiddleware(thunk,reduxImmutableStateInvariant()))
         );
 }

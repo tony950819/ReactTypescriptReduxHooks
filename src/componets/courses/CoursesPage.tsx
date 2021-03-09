@@ -10,6 +10,7 @@ import {CreateCourse,loadCourses} from '../../redux/actions/courseActions';
 
 
 import CourseList from './CourseList';
+import { RootState } from '../../redux/reducers';
 
 interface props extends StateCoursesPage,DispatchProps {}
 
@@ -24,12 +25,17 @@ interface DispatchProps {
 
 function CoursePage (courses:props) {
 
-
-    //const test= useSelector <Array<Course>>((state)=>state);
-    //console.log(test);
-    //const dispatch=useDispatch();
-
     /*
+    let userData = useSelector((state: RootState) => {
+        return state.courses;
+      });
+      console.log(userData,"data");
+
+    const test= useSelector <Array<Course>>((state)=>state);
+    console.log(test);
+    const dispatch=useDispatch();
+
+    
     const test= useSelector <Array<Course>>((state)=>state);
     console.log(test,"test");
     const [course,setCourse]=useState(new Course())
