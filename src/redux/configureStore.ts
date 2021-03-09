@@ -2,12 +2,13 @@ import {createStore,applyMiddleware} from 'redux';
 import rootReducer from './reducers';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import {composeWithDevTools} from 'redux-devtools-extension'
-import { Course } from '../Models/Models';
+import { Authour, Course } from '../Models/Models';
 import thunk from 'redux-thunk';
 
 
 const InitialState ={ 
-   courses: new Array<Course>()
+   courses: new Array<Course>(),
+   authours:new Array<Authour>()
 }
 
 function configureStore (){

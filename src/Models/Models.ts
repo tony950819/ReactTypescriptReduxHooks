@@ -6,3 +6,7 @@ export class Course {
     slug:string;
 }
 
+export class Authour {
+    id:number;
+    name:string;
+}

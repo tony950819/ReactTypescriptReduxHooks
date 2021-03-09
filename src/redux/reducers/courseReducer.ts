@@ -7,7 +7,8 @@ export default function CourseReducer  (state:Array<Course> =new Array<Course>()
         case types.CREATE_COURSE:
             return [...state, { ...action.course }];
         case types.LOAD_COURSES_SUCCESS:
-            return action.courses
+            //return {...state,courses:action.courses};
+            return action.courses;
         default :
             return state;
     }

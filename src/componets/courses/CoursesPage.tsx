@@ -1,29 +1,38 @@
 import React,{Dispatch,/* useState,*/useEffect} from 'react';
-import {Course} from '../../Models/Models'
+import {Course,Authour} from '../../Models/Models'
 import {connect,useSelector/* useSelector,useDispatch*/} from "react-redux"
 import {CreateCourse,loadCourses} from '../../redux/actions/courseActions';
+import {loadAuthours} from '../../redux/actions/authourActions';
+import {SetName} from '../../Actions'
 //import { bindActionCreators } from 'redux';
 //import { store } from '../../redux/configureStore';
 
 //import {CourseReducerModel} from '../../redux/reducers/courseReducer'
 //import {store} from '../../redux/configureStore'
-
-
 import CourseList from './CourseList';
-import { RootState } from '../../redux/reducers';
+//import { RootState } from '../../redux/reducers';
 
 interface props extends StateCoursesPage,DispatchProps {}
 
-interface StateCoursesPage {
-    courses:Array<Course>,
+class StateCoursesPage {
+    courses:Array<Course>=  new Array<Course>();
+    authours:Array<Authour> = new Array<Authour>();
 }
 interface DispatchProps {
     CreateCourse:typeof CreateCourse,
-    loadCourses:typeof loadCourses
+    loadCourses:typeof loadCourses,
+    loadAuthours:typeof loadAuthours
 
 }
 
-function CoursePage (courses:props) {
+function CoursePage (props:props) {
+
+    /*
+    let userData = useSelector((state: RootState) => {
+        return state.authours;
+      });
+    console.log(userData,"data");
+    */
 
     /*
     let userData = useSelector((state: RootState) => {
@@ -56,7 +65,9 @@ function CoursePage (courses:props) {
        //loadCourses();
 
        ///console.log(test,"test");
-       courses.loadCourses();
+       props.loadCourses();
+       props.loadAuthours();
+       console.log(props,"au");
     },[]);
 
     /*
@@ -77,8 +88,11 @@ function CoursePage (courses:props) {
    const deleteCourse =(course:Course)=>{
         console.log(course);
    }
+  
     return (
+  
         <>
+            
         {/*  
            <form onSubmit={handleSubmit}>
              <h2>Courses</h2>
@@ -89,19 +103,28 @@ function CoursePage (courses:props) {
             {ShowCourses()}
         
         */}
-        {CourseList(courses.courses,deleteCourse)}
+        {CourseList(props.courses,deleteCourse)}
              
         </>
     )
 }
 
 
-const  mapStateToProps  = (state:any)=>({
-    courses:state.courses
+const  mapStateToProps  = (state:StateCoursesPage)=>({
+    courses:(state.authours.length==0 || state.courses.length==0)?[]: 
+    state.courses.map(course=>{
+        return {
+            ...course,authorName:SetName(course.id,state.authours)
+        }
+    }),
+    authours:state.authours
+   
 })
 
 const mapDispatchToprops =(dispatch:Dispatch<any>) => ({
     CreateCourse: (course:Course) => dispatch(CreateCourse(course)),
-    loadCourses: () =>dispatch(loadCourses())
+    loadCourses: () =>dispatch(loadCourses()),
+    loadAuthours: () =>dispatch(loadAuthours())
 })
+
 export default connect(mapStateToProps ,mapDispatchToprops) (CoursePage);
