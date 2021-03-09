@@ -7,7 +7,7 @@ export function getCourses() {
     .catch(handleError);
 }
 
-export function saveCourse(course) {
+export function saveCourse(course:any) {
   return fetch(baseUrl + (course.id || ""), {
     method: course.id ? "PUT" : "POST", // POST for create, PUT to update when id already exists.
     headers: { "content-type": "application/json" },
@@ -17,7 +17,7 @@ export function saveCourse(course) {
     .catch(handleError);
 }
 
-export function deleteCourse(courseId) {
+export function deleteCourse(courseId:any) {
   return fetch(baseUrl + courseId, { method: "DELETE" })
     .then(handleResponse)
     .catch(handleError);

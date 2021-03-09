@@ -1,6 +1,6 @@
 import React,{Dispatch,/* useState,*/useEffect} from 'react';
 import {Course} from '../../Models/Models'
-import {connect,/* useSelector,useDispatch*/} from "react-redux"
+import {connect,useSelector/* useSelector,useDispatch*/} from "react-redux"
 import {CreateCourse,loadCourses} from '../../redux/actions/courseActions';
 //import { bindActionCreators } from 'redux';
 //import { store } from '../../redux/configureStore';
@@ -24,6 +24,9 @@ interface DispatchProps {
 
 function CoursePage (courses:props) {
 
+
+    //const test= useSelector <Array<Course>>((state)=>state);
+    //console.log(test);
     //const dispatch=useDispatch();
 
     /*
@@ -45,6 +48,8 @@ function CoursePage (courses:props) {
         console.log("cargando");
         //dispatch(loadCourses())
        //loadCourses();
+
+       ///console.log(test,"test");
        courses.loadCourses();
     },[]);
 
