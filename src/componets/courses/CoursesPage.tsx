@@ -9,6 +9,8 @@ import {CreateCourse,loadCourses} from '../../redux/actions/courseActions';
 //import {store} from '../../redux/configureStore'
 
 
+import CourseList from './CourseList';
+
 interface props extends StateCoursesPage,DispatchProps {}
 
 interface StateCoursesPage {
@@ -46,6 +48,7 @@ function CoursePage (courses:props) {
        courses.loadCourses();
     },[]);
 
+    /*
     const ShowCourses = () => {
             
         let coursesTemp:Array<any> = new Array<any>();
@@ -59,6 +62,10 @@ function CoursePage (courses:props) {
             </>
         );
     }
+    */
+   const deleteCourse =(course:Course)=>{
+        console.log(course);
+   }
     return (
         <>
         {/*  
@@ -68,11 +75,11 @@ function CoursePage (courses:props) {
              <input type="text" onChange={handleChange} value={course.title}/>
              <input type="submit" value="save"></input>
             </form>
+            {ShowCourses()}
         
         */}
-      
-             {ShowCourses()}
-     
+        {CourseList(courses.courses,deleteCourse)}
+             
         </>
     )
 }
