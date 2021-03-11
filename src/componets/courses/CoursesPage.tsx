@@ -65,9 +65,13 @@ function CoursePage (props:props) {
        //loadCourses();
 
        ///console.log(test,"test");
-       props.loadCourses();
-       props.loadAuthours();
-       console.log(props,"au");
+       if(props.courses.length==0) {
+            props.loadCourses();
+       }
+       if(props.authours.length==0) {
+        props.loadAuthours();
+       }
+
     },[]);
 
     /*
