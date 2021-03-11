@@ -1,10 +1,10 @@
 import React ,{useState,}from 'react';
-import {Course,Author,newCourse} from '../../Models/Models';
+import {Course,Author} from '../../Models/Models';
 import { RootState } from '../../redux/reducers';
 import CourseForm from "./CourseForm";
 import {connect,useSelector,useDispatch} from "react-redux";
 import {loadAuthors} from '../../redux/actions/authorActions';
-
+import  {createCourseSuccess} from '../../redux/actions/courseActions'
 function ManageCoursePage () {
     
     const dispatch=useDispatch();
@@ -19,8 +19,10 @@ function ManageCoursePage () {
     const [errors,setError] = useState({});
     const [saving,setSaving]=useState(false);
     
-    const onSave = () => {
-
+    const onSave = (event:any) => {
+        console.log(newCourse,"new course");
+        event.preventDefault();
+        dispatch(createCourseSuccess(newCourse));
     }
 
     const onChange = (event:any) => {
