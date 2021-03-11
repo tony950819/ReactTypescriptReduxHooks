@@ -1,4 +1,4 @@
-import React,{Dispatch,useEffect} from 'react';
+import React,{Dispatch,useEffect, useState} from 'react';
 import {Course,
         Author} from '../../Models/Models'
 import {connect} from "react-redux"
@@ -6,7 +6,7 @@ import {CreateCourse,loadCourses} from '../../redux/actions/courseActions';
 import {loadAuthors} from '../../redux/actions/authorActions';
 import {SetName} from '../../Actions'
 import CourseList from './CourseList';
-
+import {Redirect} from 'react-router-dom';
 
 interface props extends StateCoursesPage,DispatchProps {}
 
@@ -23,6 +23,7 @@ interface DispatchProps {
 
 function CoursePage (props:props) {
 
+    const [redirectToAddCoursePage,setRedirectToAddCoursePage] =useState(false)
     useEffect(() => {
       
        if(props.courses.length==0) {
@@ -42,6 +43,14 @@ function CoursePage (props:props) {
     return (
   
         <>
+         {redirectToAddCoursePage && <Redirect to="/course" />}
+        <button
+            style={{ marginBottom: 20 }}
+            className="btn btn-primary add-course"
+            onClick={() => setRedirectToAddCoursePage(true)}
+        >
+            Add Course
+        </button>
         {CourseList(props.courses,deleteCourse)}
              
         </>
