@@ -4,7 +4,9 @@ import { RootState } from '../../redux/reducers';
 import CourseForm from "./CourseForm";
 import {connect,useSelector,useDispatch} from "react-redux";
 import {loadAuthors} from '../../redux/actions/authorActions';
-import  {createCourseSuccess} from '../../redux/actions/courseActions'
+import  {saveCourse} from '../../redux/actions/courseActions';
+import {Redirect} from 'react-router-dom';
+
 function ManageCoursePage () {
     
     const dispatch=useDispatch();
@@ -15,14 +17,20 @@ function ManageCoursePage () {
     if(authors.length==0) {
         dispatch(loadAuthors())
     }
+    const [redirectProperty,setRedirect] =useState(false)
     const [newCourse,setCourse] =useState(new Course())
     const [errors,setError] = useState({});
     const [saving,setSaving]=useState(false);
     
-    const onSave = (event:any) => {
-        console.log(newCourse,"new course");
+    const onSave = async (event:any) => {
         event.preventDefault();
-        dispatch(createCourseSuccess(newCourse));
+        try{
+            await  dispatch(saveCourse(newCourse));  
+            setRedirect(true);
+        }catch(err){
+            alert(err);
+        }
+      
     }
 
     const onChange = (event:any) => {
@@ -36,6 +44,7 @@ function ManageCoursePage () {
 
     return (
         <>
+           {redirectProperty?<Redirect to="/courses"/>:null}
           {CourseForm(newCourse,authors,onSave,onChange,saving,errors)}
         </>
     );

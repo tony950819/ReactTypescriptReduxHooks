@@ -27,7 +27,7 @@ const CourseList = (courses:Array<Course>,onDeleteClick:any) => (
               </a>
             </td>
             <td>
-              <Link to={"/course/" + course.slug}>{course.title}</Link>
+              <Link to={"/course/" + course.id}>{course.title}</Link>
             </td>
             <td>{course.authorName}</td>
             <td>{course.category}</td>

@@ -14,4 +14,5 @@ function configureStore (){
             composeWithDevTools(applyMiddleware(thunk,reduxImmutableStateInvariant()))
         );
 }
+
 export const store:any=configureStore();

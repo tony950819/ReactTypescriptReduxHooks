@@ -5,7 +5,6 @@ export default function CourseReducer  (state=InitialState.courses,action:any){
 
     switch(action.type){
         case types.CREATE_COURSE_SUCCESS:
-            console.log("ingresando",action.course);
             return [...state,{...action.course}]
         case types.CREATE_COURSE_SUCCESS:
             return state.map((course:Course)=>course.id==action.course.id?action.course:course)
