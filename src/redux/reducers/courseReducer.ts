@@ -1,7 +1,7 @@
-import { Course } from "../../Models/Models";
 import * as types from '../actions/actionType'
+import {InitialState} from '../reducers/InitialState'
 
-export default function CourseReducer  (state:Array<Course> =new Array<Course>(),action:any){
+export default function CourseReducer  (state=InitialState.courses,action:any){
 
     switch(action.type){
         case types.CREATE_COURSE:

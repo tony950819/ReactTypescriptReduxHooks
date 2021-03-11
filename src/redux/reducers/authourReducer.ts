@@ -1,8 +1,8 @@
-import { Authour } from "../../Models/Models";
+import {InitialState} from '../reducers/InitialState'
 import * as types from '../actions/actionType'
 
-export default function AuthoursReducer  (state:Array<Authour> =new Array<Authour>(),action:any){
-    
+export default function AuthoursReducer  (state=InitialState.authours,action:any){
+
     switch(action.type){
         case types.LOAD_AUTHOUR_SUCSESS:
             return action.authours;
