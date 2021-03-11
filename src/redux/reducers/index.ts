@@ -1,10 +1,10 @@
 import {combineReducers} from 'redux';
 import courses from './courseReducer';
-import authours from './authourReducer'
+import authors from './authourReducer'
 
 const rootReducer = combineReducers({
     courses:courses,
-    authours:authours
+    authors:authors
 });
 
 export type RootState = ReturnType<typeof rootReducer>

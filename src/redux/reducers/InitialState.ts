@@ -1,5 +1,5 @@
-import { Authour, Course } from '../../Models/Models';
+import { Author, Course } from '../../Models/Models';
 export const InitialState = { 
     courses:new Array<Course>(),
-    authours:new Array<Authour>()
+    authors:new Array<Author>()
  } as any;

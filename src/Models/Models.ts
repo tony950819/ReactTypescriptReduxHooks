@@ -4,9 +4,19 @@ export class Course {
     authorName:string;
     category:string;
     slug:string;
+    authorId:number;
 }
 
-export class Authour {
+export class Author {
     id:number;
     name:string;
 }
+
+export class  newCourse{
+    id: any=null;
+    title: string;
+    authorId: any=null;
+    category: string;
+}
+
+
