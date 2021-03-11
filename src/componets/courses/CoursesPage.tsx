@@ -3,7 +3,7 @@ import {Course,
         Author} from '../../Models/Models'
 import {connect} from "react-redux"
 import {CreateCourse,loadCourses} from '../../redux/actions/courseActions';
-import {loadAuthors} from '../../redux/actions/authourActions';
+import {loadAuthors} from '../../redux/actions/authorActions';
 import {SetName} from '../../Actions'
 import CourseList from './CourseList';
 

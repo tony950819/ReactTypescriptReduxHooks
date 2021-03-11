@@ -3,7 +3,7 @@ import {Course,Author,newCourse} from '../../Models/Models';
 import { RootState } from '../../redux/reducers';
 import CourseForm from "./CourseForm";
 import {connect,useSelector,useDispatch} from "react-redux";
-import {loadAuthors} from '../../redux/actions/authourActions';
+import {loadAuthors} from '../../redux/actions/authorActions';
 
 function ManageCoursePage () {
     
