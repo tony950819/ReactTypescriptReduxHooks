@@ -1,7 +1,7 @@
 import {Author} from '../../Models/Models';
 import * as authorApi from "../../api/authorApi";
 import * as types from './actionType'
-import {beginAPICAL} from '../actions/apiStatusActions'
+import {beginAPICAL,apiCallError} from '../actions/apiStatusActions'
 
 
 export function   loadAuthorsSuccess (authors:Array<Author>) {
@@ -14,6 +14,7 @@ export function loadAuthors () {
         return authorApi.getAuthors().then(authors=>{
             dispatch(loadAuthorsSuccess(authors));
         }).catch(error=>{
+            dispatch(apiCallError());
             throw error;
         });    
     }

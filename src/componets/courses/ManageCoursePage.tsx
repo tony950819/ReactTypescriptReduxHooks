@@ -51,12 +51,15 @@ function ManageCoursePage (props:props) {
     const onSave = async (event:any) => {
         event.preventDefault();
         setSaving(true);
-        toast.success("Course saved"); 
         try{
             await  dispatch(saveCourse(newCourse)); 
+            toast.success("Course saved."); 
             setRedirect(true);
         }catch(err){
-            alert(err);
+            setSaving(false);
+            setError({
+                onSave:err.message
+            })
         }
       
     }
