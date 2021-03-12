@@ -69,9 +69,14 @@ function ManageCoursePage (props:props) {
 
     return (
         <>
-         
-           {redirectProperty?<Redirect to="/courses"/>:null}
-          {CourseForm(newCourse,authors,onSave,onChange,saving,errors)}
+          {props.courses.length ==0 || authors.length==0?
+          (Spinner()):
+            <>
+            {redirectProperty?<Redirect to="/courses"/>:null}
+            {CourseForm(newCourse,authors,onSave,onChange,saving,errors)}
+            </>
+          }
+           
         </>
     );
 }
