@@ -1,4 +1,4 @@
-import React ,{useState,Dispatch}from 'react';
+import React ,{useState,Dispatch, useEffect}from 'react';
 import {Course,Author} from '../../Models/Models';
 import { RootState } from '../../redux/reducers';
 import CourseForm from "./CourseForm";
@@ -27,10 +27,22 @@ function ManageCoursePage (props:props) {
     const [saving,setSaving]=useState(false);
 
     const dispatch=useDispatch();
+    
     const authors:Array<Author> = useSelector((state: RootState) => {
         return state.authors;
     });
     
+    useEffect(()=>{
+        
+        if(props.courses.length>0) {
+            setCourse({...props.newCourse});
+        }else{
+            dispatch(loadCourses());
+        }
+      
+
+    },[props.courses]);
+
     if(authors.length==0) {
         dispatch(loadAuthors())
     }
