@@ -10,7 +10,7 @@ function configureStore (){
    //we'll be able to interact with our Redux store using Redux dev tools in the browser.
     return  createStore(
             rootReducer,
-            InitialState,
+            InitialState as any,
             composeWithDevTools(applyMiddleware(thunk,reduxImmutableStateInvariant()))
         );
 }

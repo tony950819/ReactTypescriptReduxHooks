@@ -12,3 +12,6 @@ export function SetName(id:number,authors:Array<Author>){
 export function getCourseById (courses:Array<Course>,id:number) {
     return courses.find(dato=>dato.id==id) ||null;
 }
+export function actionTypeEndsInSuccess (type:any) {
+    return type.substring(type.length-8)==="_SUCCESS";
+}

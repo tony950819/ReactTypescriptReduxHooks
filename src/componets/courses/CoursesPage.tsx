@@ -9,6 +9,7 @@ import {loadAuthors} from '../../redux/actions/authorActions';
 import {SetName} from '../../Actions'
 import CourseList from './CourseList';
 import { History, LocationState } from "history";
+import Spinner from '../../componets/common/Spinner';
 
 interface props extends StateCoursesPage,DispatchProps {}
 
@@ -16,6 +17,7 @@ class StateCoursesPage {
     courses:Array<Course>=  new Array<Course>();
     authors:Array<Author> = new Array<Author>();
     history:History<LocationState>;
+    apiCallsInProgress:number;
 }
 interface DispatchProps {
     CreateCourse:typeof CreateCourse,
@@ -26,7 +28,6 @@ interface DispatchProps {
 
 function CoursePage (props:props) {
 
-    const [redirectToAddCoursePage,setRedirectToAddCoursePage] =useState(false)
     useEffect(() => {
       
        if(props.courses.length==0) {
@@ -50,15 +51,21 @@ function CoursePage (props:props) {
     return (
   
         <>
+        {props.apiCallsInProgress>0?Spinner()
+        
+        :  
+        <>
         <button
             style={{ marginBottom: 20 }}
             className="btn btn-primary add-course"
             onClick={() => redirectWithHistory()}
         >
-            Add Course
+        Add Course
         </button>
         {CourseList(props.courses,deleteCourse)}
-             
+        </> }
+
+      
         </>
     )
 }
@@ -71,7 +78,9 @@ const  mapStateToProps  = (state:StateCoursesPage)=>({
             ...course,authorName:SetName(course.id,state.authors)
         }
     }),
-    authors:state.authors
+    authors:state.authors,
+    apiCallsInProgress:state.apiCallsInProgress,
+    
    
 })
 

@@ -8,7 +8,7 @@ import  {saveCourse} from '../../redux/actions/courseActions';
 import {Redirect} from 'react-router-dom';
 import {getCourseById} from '../../Actions';
 import {loadCourses} from '../../redux/actions/courseActions'
-
+import Spinner from '../../componets/common/Spinner';
 interface props extends Actions,state {}
 
 interface state extends Actions {
@@ -27,7 +27,6 @@ function ManageCoursePage (props:props) {
     const [saving,setSaving]=useState(false);
 
     const dispatch=useDispatch();
-    
     const authors:Array<Author> = useSelector((state: RootState) => {
         return state.authors;
     });
@@ -39,15 +38,15 @@ function ManageCoursePage (props:props) {
         }else{
             dispatch(loadCourses());
         }
+
+        if(authors.length==0) {
+            dispatch(loadAuthors())
+        }
       
 
-    },[props.courses]);
+    },[props.newCourse]);
 
-    if(authors.length==0) {
-        dispatch(loadAuthors())
-    }
-  
-    
+ 
     const onSave = async (event:any) => {
         event.preventDefault();
         try{
@@ -70,6 +69,7 @@ function ManageCoursePage (props:props) {
 
     return (
         <>
+         
            {redirectProperty?<Redirect to="/courses"/>:null}
           {CourseForm(newCourse,authors,onSave,onChange,saving,errors)}
         </>

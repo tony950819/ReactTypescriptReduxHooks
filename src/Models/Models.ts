@@ -12,13 +12,4 @@ export class Author {
     name:string;
 }
 
-/*
-export class  newCourse{
-    id: any=null;
-    title: string;
-    authorId: any=null;
-    category: string;
-}
-*/
-
 
