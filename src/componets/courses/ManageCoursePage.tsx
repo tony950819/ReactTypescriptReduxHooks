@@ -9,6 +9,7 @@ import {Redirect} from 'react-router-dom';
 import {getCourseById} from '../../Actions';
 import {loadCourses} from '../../redux/actions/courseActions'
 import Spinner from '../../componets/common/Spinner';
+import {toast} from 'react-toastify' ;
 interface props extends Actions,state {}
 
 interface state extends Actions {
@@ -49,8 +50,10 @@ function ManageCoursePage (props:props) {
  
     const onSave = async (event:any) => {
         event.preventDefault();
+        setSaving(true);
+        toast.success("Course saved"); 
         try{
-            await  dispatch(saveCourse(newCourse));  
+            await  dispatch(saveCourse(newCourse)); 
             setRedirect(true);
         }catch(err){
             alert(err);
