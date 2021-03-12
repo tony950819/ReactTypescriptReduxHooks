@@ -7,12 +7,14 @@ import {loadAuthors} from '../../redux/actions/authorActions';
 import {SetName} from '../../Actions'
 import CourseList from './CourseList';
 import {Redirect} from 'react-router-dom';
+import { History, LocationState } from "history";
 
 interface props extends StateCoursesPage,DispatchProps {}
 
 class StateCoursesPage {
     courses:Array<Course>=  new Array<Course>();
     authors:Array<Author> = new Array<Author>();
+    history:History<LocationState>;
 }
 interface DispatchProps {
     CreateCourse:typeof CreateCourse,
@@ -39,15 +41,18 @@ function CoursePage (props:props) {
    const deleteCourse =(course:Course)=>{
         console.log(course);
    }
+
+   const redirectWithHistory  =()=> {
+        props.history.push("/course");
+   }
   
     return (
   
         <>
-         {redirectToAddCoursePage && <Redirect to="/course" />}
         <button
             style={{ marginBottom: 20 }}
             className="btn btn-primary add-course"
-            onClick={() => setRedirectToAddCoursePage(true)}
+            onClick={() => redirectWithHistory()}
         >
             Add Course
         </button>
