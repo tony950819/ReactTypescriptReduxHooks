@@ -1,4 +1,4 @@
-import React ,{useState,}from 'react';
+import React ,{useState,Dispatch}from 'react';
 import {Course,Author} from '../../Models/Models';
 import { RootState } from '../../redux/reducers';
 import CourseForm from "./CourseForm";
@@ -6,21 +6,35 @@ import {connect,useSelector,useDispatch} from "react-redux";
 import {loadAuthors} from '../../redux/actions/authorActions';
 import  {saveCourse} from '../../redux/actions/courseActions';
 import {Redirect} from 'react-router-dom';
+import {getCourseById} from '../../Actions';
+import {loadCourses} from '../../redux/actions/courseActions'
 
-function ManageCoursePage () {
+interface props extends Actions,state {}
+
+interface state extends Actions {
+    courses:Array<Course>;
+    newCourse:Course
+}
+interface Actions  {
+    loadCourses:typeof loadCourses
+}
+
+function ManageCoursePage (props:props) {
     
+    const [redirectProperty,setRedirect] =useState(false)
+    const [newCourse,setCourse] =useState(props.newCourse)
+    const [errors,setError] = useState({});
+    const [saving,setSaving]=useState(false);
+
     const dispatch=useDispatch();
-    let authors:Array<Author> = useSelector((state: RootState) => {
+    const authors:Array<Author> = useSelector((state: RootState) => {
         return state.authors;
     });
     
     if(authors.length==0) {
         dispatch(loadAuthors())
     }
-    const [redirectProperty,setRedirect] =useState(false)
-    const [newCourse,setCourse] =useState(new Course())
-    const [errors,setError] = useState({});
-    const [saving,setSaving]=useState(false);
+  
     
     const onSave = async (event:any) => {
         event.preventDefault();
@@ -49,4 +63,15 @@ function ManageCoursePage () {
         </>
     );
 }
-export default ManageCoursePage;
+
+const  mapStateToProps  = (state:state,ownProps:any)=>({
+    courses:(state.courses.length==0)?[]: state.courses,
+    newCourse:(ownProps.match.params.id && state.courses.length>0)?getCourseById(state.courses,ownProps.match.params.id):new Course(),
+})
+
+const mapDispatchToprops =(dispatch:Dispatch<any>) => ({
+    loadCourses: () =>dispatch(loadCourses()),
+
+})
+
+export default connect(mapStateToProps,mapDispatchToprops) (ManageCoursePage);
